@@ -10,7 +10,7 @@ test('Get Available Pets', async ({ request }) => {
     console.log("status text is:" + await response.statusText().toString());
     console.log("response body:" + await response.body().toString());
    // expect((await response.json()).contain("fish"));
-    expect(response.status).toBe('available');
+    expect(response).toBeOK(); //checks respose code is 200
         
 });
 test('Get Pet By Available PetID', async ({ request }) => {
@@ -44,6 +44,7 @@ test('Delete non existing Pet', async ({ request }) => {
   const response = await request.delete('https://petstore.swagger.io/v2/pet/786');
     expect(await response.statusText()).toBe("Not Found");
     expect(await response.status()).toBe(404);
+    expect(response).not.toBeOK(); //Response is NOT 200
     
 });
 
@@ -91,4 +92,42 @@ test('Add New PET using POST method', async ({ request }) => {
   const responseBody = await response.json();
   expect(responseBody).toHaveProperty('id');
   expect(responseBody.name).toBe('Jai Anvesh');
+});
+
+//Update an existing PET using PUT method
+test('Update an existing PET using PUT method', async ({ request }) => {
+  const postData = {
+  "id":1234,
+  "category": {
+    "id": 0,
+    "name": "Wild"
+  },
+  "name": "Jai Anvesh Gummadilli",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "available"
+   
+  };
+
+  const response = await request.post('https://petstore.swagger.io/v2/pet', {
+    data: postData,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  // Check response status
+  expect(response.status()).toBe(200);
+
+  // Parse and validate JSON response
+  const responseBody = await response.json();
+  expect(responseBody).toHaveProperty('id');
+  //expect(responseBody.name).toBe('Jai Anvesh');
 });
