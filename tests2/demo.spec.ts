@@ -8,7 +8,7 @@ test('operator',async()=>{
 });
 
 test('Learn type of',async()=>{
-    const age:number=35;
+    const age:number=25;
     if(age>25)
     {
         let city: string ="Hyderabad";
@@ -16,7 +16,25 @@ test('Learn type of',async()=>{
     }
     console.log(typeof age);
    // console.log(typeof city); //undefined coz of scope
-    expect.soft(expect(age).toContain(35));
+   // expect.soft(expect(age).toContain(25));
     console.log("after soft assertion");
-  
+    printName();
+    console.log("anands age is" + GetAge());
+    let myStates:string[]=GetStates();
+    console.log(myStates[0]);
 });
+
+function printName():void
+{
+    console.log("my name is anand");
+}
+function GetAge():number
+{
+    return 25;
+}
+function GetStates(): string[]
+{
+   let states:string[]=["AP","UP"];
+   return states;
+
+}

@@ -25,11 +25,12 @@ export default defineConfig({
   //reporter: 'html',
   reporter: 'html',
   //Ignore tests from following spec files
-    testIgnore: 'demo.spec.ts',
+    //testIgnore: 'demo.spec.ts',
 
     // Glob patterns or regular expressions that match test files.
   //testMatch: '*tests2/GoogleTests.spec.ts',
   testMatch: '*tests2/*.spec.ts',
+  testMatch: '*tests2/APIAutomation/*.spec.ts',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: false,
