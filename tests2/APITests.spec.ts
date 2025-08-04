@@ -55,3 +55,40 @@ test('Delete existing Pet', async ({ request }) => {
     expect(await response.status()).toBe(200);
     
 });
+//Add New PET using POST methd
+test('Add New PET using POST method', async ({ request }) => {
+  const postData = {
+  "id":1234,
+  "category": {
+    "id": 0,
+    "name": "Wild"
+  },
+  "name": "Jai Anvesh",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    }
+  ],
+  "status": "pending"
+   
+  };
+
+  const response = await request.post('https://petstore.swagger.io/v2/pet', {
+    data: postData,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  // Check response status
+  expect(response.status()).toBe(200);
+
+  // Parse and validate JSON response
+  const responseBody = await response.json();
+  expect(responseBody).toHaveProperty('id');
+  expect(responseBody.name).toBe('Jai Anvesh');
+});
