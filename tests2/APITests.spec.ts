@@ -11,7 +11,11 @@ test('Get Available Pets', async ({ request }) => {
     console.log("response body:" + await response.body().toString());
    // expect((await response.json()).contain("fish"));
     expect(response).toBeOK(); //checks respose code is 200
-        
+    let resp1:string=await response.text(); //get response body
+    console.log(resp1);  
+    console.log(await response.url()); //Response URL
+    const respHeaders=await response.headers();
+    console.log(respHeaders); //Print response headers
 });
 test('Get Pet By Available PetID', async ({ request }) => {
   const petID:number=1234;
