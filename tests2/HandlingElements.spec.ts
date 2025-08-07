@@ -2,6 +2,7 @@ import {test,expect,Browser, Page, Locator} from '@playwright/test';
 import { chromium } from '@playwright/test';
 import { PageActions } from './PageActions';
 
+const _pageActions=new PageActions();
 test('Handle text box',async()=>{
 
     const browser:Browser = await chromium.launch({headless:false, channel:'chrome'}); 
@@ -10,8 +11,8 @@ test('Handle text box',async()=>{
     const txtSrch: Locator=page.locator("[name='q']"); 
     txtSrch.fill("India");
 
-    const length:string= await txtSrch.getAttribute("maxlength");
-    console.log("max length is:" + length);
+    const length1:number= await txtSrch.getAttribute("maxlength");
+    console.log("max length is:" + length1);
     await expect(txtSrch).toHaveValue("India");
     const txtValue:string= await txtSrch.inputValue();
 
@@ -36,9 +37,10 @@ test('Handling select box by value',async()=>{
     const page:Page= await browser.newPage();
     await page.goto('https://www.magupdate.co.uk/reader-enquiry/PATI/232');
      const countryDD='select#Contact_CountryCode';
-     const _pageActions=new PageActions();
+     //await _pageActions.waitForElement(page,'select#Contact_CountryCode');
      await _pageActions.scrollByPixels(page,0,800);
      await _pageActions.selectDropdownOption(page,countryDD,'KE');
+     await _pageActions.takeScreenshot(page,"C:\\Users\Anand.Gummadilli\\Documents\\Anand_Details\\Training\\PlaywrightScreenshots\\sc1.png");
      await page.waitForTimeout(3000);
 });
  
