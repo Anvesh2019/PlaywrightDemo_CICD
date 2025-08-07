@@ -91,12 +91,11 @@ test('Verify Scroll by pixels', async ({  }) => {
 test('Verify Click on Element ', async ({  }) => {
   const browser = await chromium.launch();
   const page = await browser.newPage();
-
   await page.goto('https://amazon.in');
-  const cart:Locator=await page.locator("xpath=//span[@id='nav-cart-count']");
-  //await clickElement(cart);  
-  
-  await _pageActions.clickElement(cart);
+  const srchIcon:Locator=await page.locator("xpath=//input[@id='nav-search-submit-button']");
+  const srchBox:Locator=await page.locator("xpath=//input[@id='twotabsearchtextbox']");
+  await _pageActions.EnterText(srchBox,"dell laptop 16gb amd rysen5");
+  await _pageActions.clickElement(srchIcon);
   await page.waitForTimeout(2000);
-  await browser.close();
+ // await browser.close();
 });

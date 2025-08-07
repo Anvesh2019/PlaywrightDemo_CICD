@@ -1,5 +1,6 @@
 import {test,expect,Browser, Page, Locator} from '@playwright/test';
 import { chromium } from '@playwright/test';
+import { PageActions } from './PageActions';
 
 test('Handle text box',async()=>{
 
@@ -29,6 +30,19 @@ test('Handling Dropdown',async()=>{
     await page.selectOption(countryDD,{label:'Israel'});
     await page.selectOption(countryDD,{index:2});
 });
+
+test('Handling select box by value',async()=>{
+     const browser:Browser = await chromium.launch({headless:false, channel:'chrome'}); 
+    const page:Page= await browser.newPage();
+    await page.goto('https://www.magupdate.co.uk/reader-enquiry/PATI/232');
+     const countryDD='select#Contact_CountryCode';
+     const _pageActions=new PageActions();
+     await _pageActions.scrollByPixels(page,0,800);
+     await _pageActions.selectDropdownOption(page,countryDD,'KE');
+     await page.waitForTimeout(3000);
+});
+ 
+
 test('Handling Listbox',async()=>{
 
     const browser:Browser = await chromium.launch({headless:false, channel:'chrome'}); 
