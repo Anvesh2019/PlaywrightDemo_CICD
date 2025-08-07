@@ -16,6 +16,7 @@ test('Get Available Pets', async ({ request }) => {
     console.log(await response.url()); //Response URL
     const respHeaders=await response.headers();
     console.log(respHeaders); //Print response headers
+    console.log(await response.headersArray());
 });
 test('Get Pet By Available PetID', async ({ request }) => {
   const petID:number=1234;

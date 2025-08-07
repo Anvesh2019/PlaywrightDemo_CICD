@@ -68,3 +68,44 @@ test('Focus on an Element', async()=>{
     await txtSrch.fill("India");
        
 });
+
+test('Verify Scroll by pixels', async ({  }) => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  await page.goto('https://amazon.in');
+
+  // Scroll 0px horizontally and 500px vertically
+  for(let i:number=0;i<5;i++)
+  {
+    await scrollByPixels(page, 0, 400);
+    await page.waitForTimeout(1000);
+  }
+  await browser.close();
+});
+
+async function scrollByPixels(page: Page, x: number, y: number): Promise<void> {
+  await page.evaluate(
+    ([scrollX, scrollY]) => {
+      window.scrollBy(scrollX, scrollY);
+    },
+    [x, y]
+  );
+}
+
+export async function clickElement(locator: Locator): Promise<void> 
+{
+  await locator.click();
+}
+
+
+test('Verify Click on Element ', async ({  }) => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  await page.goto('https://amazon.in');
+  const cart:Locator=await page.locator("xpath=//span[@id='nav-cart-count']");
+  await clickElement(cart);  
+  await page.waitForTimeout(2000);
+  await browser.close();
+});

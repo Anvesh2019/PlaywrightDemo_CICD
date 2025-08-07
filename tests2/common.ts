@@ -1,5 +1,6 @@
 import { test, expect,Page, Browser, Locator } from '@playwright/test';
 import { webkit, chromium, firefox } from 'playwright'; 
+
 export class common
 {
     public AddNumbers(a:number, b:number)
@@ -11,4 +12,6 @@ export class common
     {
     console.log("My name is:" + name);
     }
+
+
 }
