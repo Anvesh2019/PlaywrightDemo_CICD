@@ -1,7 +1,9 @@
-import {test,expect,Locator, Page, Browser} from '@playwright/test'
-import { BADHINTS } from 'dns';
-import { chromium,webkit,firefox } from 'playwright'
+import {test,Locator, Page, Browser} from '@playwright/test'
+import { chromium } from 'playwright'
+import {PageActions} from './PageActions'
+import { clsStud } from './clsStud';
 
+const _pageActions=new PageActions();
 test('Learn Mouse hover', async()=>{
       const browser:Browser = await chromium.launch({headless:false, channel:'chrome'}); 
         const page:Page= await browser.newPage();
@@ -78,25 +80,12 @@ test('Verify Scroll by pixels', async ({  }) => {
   // Scroll 0px horizontally and 500px vertically
   for(let i:number=0;i<5;i++)
   {
-    await scrollByPixels(page, 0, 400);
+    await _pageActions.scrollByPixels(page, 0, 400);
     await page.waitForTimeout(1000);
   }
   await browser.close();
 });
 
-async function scrollByPixels(page: Page, x: number, y: number): Promise<void> {
-  await page.evaluate(
-    ([scrollX, scrollY]) => {
-      window.scrollBy(scrollX, scrollY);
-    },
-    [x, y]
-  );
-}
-
-export async function clickElement(locator: Locator): Promise<void> 
-{
-  await locator.click();
-}
 
 
 test('Verify Click on Element ', async ({  }) => {
@@ -105,7 +94,9 @@ test('Verify Click on Element ', async ({  }) => {
 
   await page.goto('https://amazon.in');
   const cart:Locator=await page.locator("xpath=//span[@id='nav-cart-count']");
-  await clickElement(cart);  
+  //await clickElement(cart);  
+  
+  await _pageActions.clickElement(cart);
   await page.waitForTimeout(2000);
   await browser.close();
 });
