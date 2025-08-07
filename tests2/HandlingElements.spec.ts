@@ -37,11 +37,28 @@ test('Handling select box by value',async()=>{
     const page:Page= await browser.newPage();
     await page.goto('https://www.magupdate.co.uk/reader-enquiry/PATI/232');
      const countryDD='select#Contact_CountryCode';
-     //await _pageActions.waitForElement(page,'select#Contact_CountryCode');
      await _pageActions.scrollByPixels(page,0,800);
      await _pageActions.selectDropdownOption(page,countryDD,'KE');
      await _pageActions.takeScreenshot(page,"C:\\Users\Anand.Gummadilli\\Documents\\Anand_Details\\Training\\PlaywrightScreenshots\\sc1.png");
-     await page.waitForTimeout(3000);
+    try
+    {
+     const ddCountry:Locator=page.locator('select#Contact_CountryCode');
+     if(await ddCountry.count()>0)
+     {
+      await ddCountry.screenshot({path:'sc1.png'});
+      await page.waitForTimeout(3000);
+     }
+     else
+     {
+        console.log("element not found");
+     }
+    
+    }
+    catch(error)
+    {
+        console.log("screen shot failed" + (error as Error).message);
+    }
+   
 });
  
 
