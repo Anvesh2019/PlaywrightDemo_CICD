@@ -39,13 +39,13 @@ test('Handling select box by value',async()=>{
      const countryDD='select#Contact_CountryCode';
      await _pageActions.scrollByPixels(page,0,800);
      await _pageActions.selectDropdownOption(page,countryDD,'KE');
-     await _pageActions.takeScreenshot(page,"C:\\Users\Anand.Gummadilli\\Documents\\Anand_Details\\Training\\PlaywrightScreenshots\\sc1.png");
+     await _pageActions.takeScreenshot(page,"screenshots/screenshot1.png");
     try
     {
      const ddCountry:Locator=page.locator('select#Contact_CountryCode');
      if(await ddCountry.count()>0)
      {
-      await ddCountry.screenshot({path:'sc1.png'});
+      await ddCountry.screenshot({path:'screenshots/sc1.png'});
       await page.waitForTimeout(3000);
      }
      else
