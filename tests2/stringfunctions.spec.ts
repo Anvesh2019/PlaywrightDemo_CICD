@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test'
-test('Index OF',async()=>{
+test('learn string functions',async()=>{
 
 let city:string="Hyderabad";
 console.log(city.indexOf('y'));  //y position

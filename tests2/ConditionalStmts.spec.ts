@@ -59,3 +59,27 @@ test('if elseif statement',async()=>{
             } 
          } 
     });
+
+    test('switch without break stmt',async()=>
+    {
+        var grade: string = 'A';
+        console.log("Entering switch block");
+        switch(grade) 
+        { 
+        case "A": { 
+            console.log("Excellent"); 
+        } 
+        case "B": { 
+            console.log("Good"); 
+        } 
+        case "C": {
+            console.log("Fair"); 
+        } 
+        case "D": { 
+            console.log("Poor"); 
+        }  
+        default: { 
+            console.log("Invalid choice");          
+        } 
+        }
+    });
